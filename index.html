@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Classic Chess </title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Start Modal -->
+  <div id="startModal" class="modal">
+    <div class="modal-content">
+      <h2>New Game Options</h2>
+
+      <div class="row">
+        <label>Mode</label>
+        <select id="modeSelect">
+          <option value="pvp">Player vs Player</option>
+          <option value="pva" selected>Player vs AI</option>
+        </select>
+      </div>
+
+      <div class="row" id="aiRow">
+        <label>AI Level</label>
+        <select id="aiLevel">
+          <option value="easy">Easy (Depth 2)</option>
+          <option value="medium" selected>Medium (Depth 4)</option>
+          <option value="hard">Hard (Depth 5)</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label>Time Control</label>
+        <select id="timeControl">
+          <option value="0">No clock</option>
+          <option value="3">3 min</option>
+          <option value="5" selected>5 min</option>
+          <option value="10">10 min</option>
+        </select>
+      </div>
+
+      <div class="row small">
+        <input type="checkbox" id="enableUndo" checked />
+        <label for="enableUndo">Enable Undo</label>
+      </div>
+
+      <div class="row small">
+        <input type="checkbox" id="enableHints" checked />
+        <label for="enableHints">Enable Hints</label>
+      </div>
+
+      <div class="row small">
+        <label>Theme</label>
+        <select id="startTheme">
+          <option value="classic" selected>Green & Off-white</option>
+          <option value="brown">Brown & Cream</option>
+        </select>
+      </div>
+
+      <div class="row small">
+        <label>Enable Opening Book</label>
+        <input type="checkbox" id="enableBook" checked />
+      </div>
+
+      <div class="row buttons">
+        <button id="startBtn" class="btn primary">Start</button>
+        <button id="closeBtn" class="btn">Close</button>
+      </div>
+
+      <p class="muted">Place piece images and sounds in <code>./assets/</code> (see list below).</p>
+      <p class="muted">Pieces: white_king.png, white_queen.png, white_rook.png, white_bishop.png, white_knight.png, white_pawn.png, black_king.png, black_queen.png, black_rook.png, black_bishop.png, black_knight.png, black_pawn.png</p>
+      <p class="muted">Sounds (optional): move.mp3, capture.mp3, check.mp3, victory.mp3</p>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app" class="container">
+    <div class="left-panel">
+      <div class="board-wrapper">
+        <div id="board" class="board"></div>
+        <div id="indicators" class="indicators"></div>
+
+        <!-- Promotion chooser overlay -->
+        <div id="promotionOverlay" class="overlay hidden">
+          <div class="promo-box" id="promoBox"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="controls">
+        <div class="clock-row">
+          <div class="player white">
+            <div class="name">White</div>
+            <div id="whiteClock" class="time">--:--</div>
+          </div>
+          <div class="player black">
+            <div class="name">Black</div>
+            <div id="blackClock" class="time">--:--</div>
+          </div>
+        </div>
+
+        <div class="buttons-row">
+          <button id="newGameBtn" class="btn">New Game</button>
+          <button id="undoBtn" class="btn">Undo</button>
+          <button id="restartBtn" class="btn">Restart</button>
+          <button id="flipBtn" class="btn">Flip</button>
+          <button id="themeBtn" class="btn">Theme</button>
+        </div>
+
+        <div class="options-row">
+          <button id="hintBtn" class="btn">Hint</button>
+          <label class="toggle">
+            <input type="checkbox" id="soundToggle" checked />
+            <span>Sound</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="history-panel">
+        <div class="header">Move History</div>
+        <div id="movesList" class="moves-list"></div>
+      </div>
+
+      <div class="status-panel">
+        <div id="gameStatus" class="status">Status: Ready</div>
+        <div id="fen" class="fen">FEN: </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">Classic Chess — Improved AI, Built to run locally</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
